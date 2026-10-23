@@ -1,0 +1,33 @@
+{
+  // EP × Beko Sales Challenge – Konfiguration für Cloudflare Workers (Build aus GitHub)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ep-beko-challenge",
+  "main": "app.js",
+  "compatibility_date": "2025-09-01",
+
+  // App-Dateien liegen im Hauptverzeichnis (index.html, kataloge/); alles andere schließt .assetsignore aus.
+  // Der Worker läuft vor jeder Datei (Login-Schutz).
+  "assets": { "directory": "./", "binding": "ASSETS", "run_worker_first": true },
+
+  // Datenbank und Datei-Speicher: werden beim ersten Deploy automatisch angelegt und bleiben danach verknüpft
+  "d1_databases": [{ "binding": "DB" }],
+  "kv_namespaces": [{ "binding": "FILES" }],
+
+  // Wochen- und Monatsmail: freitags stündlich prüfen (UTC), Versand einmal ab der Uhrzeit aus dem Admin-Bereich
+  "triggers": { "crons": ["0 * * * 5"] },
+
+  "vars": {
+    "ADMIN_EMAILS": "harald.kasperowski@beko.com",
+    "APP_URL": "https://ep-beko-challenge.bekoaustria.com"
+  },
+  // Variablen und Secrets aus dem Dashboard (z. B. MAIL_FROM, CF_API_TOKEN, START_PASSWORD) beim Deploy behalten
+  "keep_vars": true,
+
+  "routes": [
+    { "pattern": "ep-beko-challenge.bekoaustria.com", "custom_domain": true },
+    { "pattern": "ep-beko-challenge-2026.bekoaustria.com", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": true }
+}
