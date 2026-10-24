@@ -1,0 +1,22 @@
+# Nur index.html und kataloge/ werden als Dateien ausgeliefert
+.git
+.github
+.wrangler
+node_modules
+wrangler.jsonc
+wrangler.toml
+package.json
+package-lock.json
+README.md
+.gitignore
+.assetsignore
+app.js
+worker.js
+_worker.js
+_headers
+*.sh
+workflows
+mailer
+scripts
+src
+public
