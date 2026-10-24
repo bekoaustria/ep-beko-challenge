@@ -1,6 +1,0 @@
-node_modules/
-.wrangler/
-/wrangler.toml
-/mailer/wrangler.toml
-.dev.vars
-.DS_Store
